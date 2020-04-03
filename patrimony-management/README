@@ -1,0 +1,132 @@
+
+#--------------------------------------------------------------------------------------
+# DDL - Script para criação do data base
+
+-> DDL.SQL
+
+#--------------------------------------------------------------------------------------
+# HIBERNATE - Uma alternativa para criar o data base é, incluir a configuração abaixo:
+
+No arquivo src/main/resources/application.yml
+
+Alterar as linhas abaixo com as configurações do data base
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create
+#--------------------------------------------------------------------------------------
+# Configurações de conexão com o data base
+
+No arquivo src/main/resources/application.yml
+
+Alterar as linhas abaixo com as configurações do data base
+
+spring:
+  datasource:
+    url: jdbc:postgresql://DATA_BASE_URL:DATA_BASE_PORT/DATA_BASE_OWNER
+    username: DATA_BASE_USER
+    password: DATA_BASE_PASSWORD
+
+#--------------------------------------------------------------------------------------
+# Documentação da API
+
+Foi implementado a documentação com o swagger
+
+Link de acesso: http://localhost:8080/swagger-ui.html
+
+Apenas os endpoints abaixo não possuem autenticação:
+  POST /user
+  POST /auth
+
+#--------------------------------------------------------------------------------------
+
+Exemplos de chamadas ao sistema
+
+CRIAÇÃO DE USUARIO
+
+curl -X POST \
+  http://localhost:8080/user \
+  -H 'Accept: */*' \
+  -H 'Accept-Encoding: gzip, deflate' \
+  -H 'Cache-Control: no-cache' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Length: 98' \
+  -H 'Content-Type: application/json' \
+  -H 'Cookie: JSESSIONID=E98A4FA2B63FFD48EABB7DDB2EB7B1CD' \
+  -H 'Host: localhost:8080' \
+  -H 'Postman-Token: 133e93ea-99f2-4dfe-b382-26beb40605cf,08ef44b0-6869-4ff5-a3c6-3f5f7810e9cc' \
+  -H 'User-Agent: PostmanRuntime/7.19.0' \
+  -H 'cache-control: no-cache' \
+  -d '{
+    "id": 1,
+    "name": "edileno",
+    "email": "edileno@gmail.com",
+    "password": "123456"
+}'
+
+SOLICITAÇÃO DE AUTENTICAÇÃO
+
+curl -X POST \
+  http://localhost:8080/auth \
+  -H 'Accept: */*' \
+  -H 'Accept-Encoding: gzip, deflate' \
+  -H 'Cache-Control: no-cache' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Length: 54' \
+  -H 'Content-Type: application/json' \
+  -H 'Cookie: JSESSIONID=E98A4FA2B63FFD48EABB7DDB2EB7B1CD' \
+  -H 'Host: localhost:8080' \
+  -H 'Postman-Token: b9670792-a66d-41e6-b474-227f0eb6e4eb,b8d26e21-9936-43f1-85ae-42c697282875' \
+  -H 'User-Agent: PostmanRuntime/7.19.0' \
+  -H 'cache-control: no-cache' \
+  -d '{
+	"email":"edileno@gmail.com",
+	"password":"123456"
+}'
+
+SOLICITAÇÃO DE CRIAÇÃO DE MARCA
+
+curl -X POST \
+  http://localhost:8080/brand \
+  -H 'Accept: */*' \
+  -H 'Accept-Encoding: gzip, deflate' \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgZGUgR2VyZW5jaWFtZW50byBkZSBQYXRyaW1vbmlvIiwic3ViIjoiMSIsImlhdCI6MTU4NTkyNTIxOCwiZXhwIjoxNTg2MDExNjE4fQ.7sf1hf9pFMa52SsMK__M7Uw40L8sx6wnRMzbQ-vVdZM' \
+  -H 'Cache-Control: no-cache' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Length: 22' \
+  -H 'Content-Type: application/json' \
+  -H 'Cookie: JSESSIONID=E98A4FA2B63FFD48EABB7DDB2EB7B1CD' \
+  -H 'Host: localhost:8080' \
+  -H 'Postman-Token: 1df93ea1-34d9-4978-8821-87e5783d6245,e1aeef16-7470-4324-b7c0-c21995dbca65' \
+  -H 'User-Agent: PostmanRuntime/7.19.0' \
+  -H 'cache-control: no-cache' \
+  -d '{
+	"name":"BRASTEMP"
+}'
+
+SOLICITAÇÃO DE CRIAÇÃO DE PATRIMONIO
+
+curl -X POST \
+  http://localhost:8080/patrimony \
+  -H 'Accept: */*' \
+  -H 'Accept-Encoding: gzip, deflate' \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgZGUgR2VyZW5jaWFtZW50byBkZSBQYXRyaW1vbmlvIiwic3ViIjoiMSIsImlhdCI6MTU4NTkyNTIxOCwiZXhwIjoxNTg2MDExNjE4fQ.7sf1hf9pFMa52SsMK__M7Uw40L8sx6wnRMzbQ-vVdZM' \
+  -H 'Cache-Control: no-cache' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Length: 84' \
+  -H 'Content-Type: application/json' \
+  -H 'Cookie: JSESSIONID=E98A4FA2B63FFD48EABB7DDB2EB7B1CD' \
+  -H 'Host: localhost:8080' \
+  -H 'Postman-Token: c5ead0fd-4b4c-480f-8a85-6a9535825d6b,1fd55224-9cbb-4d38-809e-f5eaaa2e195a' \
+  -H 'User-Agent: PostmanRuntime/7.19.0' \
+  -H 'cache-control: no-cache' \
+  -d '{
+	"id":1,
+	"name":"mesa de escritorio",
+	"idBrand": 1,
+	"brand": {
+		"id": "1"
+	}
+}'
+
+
